@@ -4,6 +4,13 @@ import PropTypes from 'prop-types';
 
 // class component
 class App extends React.Component {
+
+  // render 보다 먼저 호출
+  constructor(props) {
+      super(props);
+      console.log("hello");
+  }
+  
   /* 
   <state>
   class comonent는 state ojbect가 있음
@@ -27,9 +34,25 @@ class App extends React.Component {
     this.setState(current => ({ count : this.state.count - 1 })) ;
   }; 
 
+  // render이후에 호출
+  componentDidMount() {
+    console.log("component rendered");
+  }
+
+  // render 실행 후 업데이트가 완료되면 호출
+  componentDidUpdate() {
+    console.log("i updted"); 
+  }
+
+  // component가 unmount될 때 호출
+  componentWillUnmount() {
+    console.log("goodbye component");
+  }
+
   // render method
   render() {
-    return (
+      console.log("i am rendering");
+    return ( 
       <div>
         <h1> The number is : {this.state.count} </h1>
          {/* 
