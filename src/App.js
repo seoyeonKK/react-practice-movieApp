@@ -1,21 +1,49 @@
 
 import React from 'react';
-import PropTypes from 'prop-types';
+import axios from "axios";
+import Movie from "./Movie";
 
 // class component
 class App extends React.Component {
   state = {
-    isLoading : true
+    isLoading : true,
+    movies : []
   };
-  
-  componentDidMount() {
-    setTimeout(() => {
-      this.setState({ isLoading: false });
-    }, 6000) // 6초 후에 실행 
+
+  getMovies = async() => {
+    const {
+      data : {
+        data: { movies }
+      }
+    } = await axios.get("https://yts-proxy.nomadcoders1.now.sh/list_movies.json?sort_by=rating");
+    this.setState({ movies, isLoading : false }); // movies : movies 와 같음  
   }
+
+  componentDidMount() {
+    this.getMovies();
+  }
+
   render() {
-    const { isLoading } = this.state;
-    return <div>{isLoading ? "Loading" : "We are ready"}</div>;
+    const { isLoading, movies } = this.state;
+    return (
+      <div>
+        {isLoading 
+          ? "Loading..." 
+          : movies.map(movie => {
+            console.log(movie);
+            return (
+              <Movie
+                key = {movie.id} // chils의 유일한 key prop(없으면 warning)
+                id = {movie.id} 
+                year = {movie.year} 
+                title = {movie.title} 
+                summary = {movie.summary} 
+                poster = {movie.medium_cover_image}
+              />
+            );
+          })}
+      </div>
+    );
   }
 }
 
