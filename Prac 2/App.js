@@ -2,12 +2,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-/* 
-  App()은 부모 Component
-  Panda(), renderPanda()는 자식 Component
- */
 
- 
  /* 
  <설치할 것>
  npm i prop-types
@@ -15,7 +10,11 @@ import PropTypes from 'prop-types';
  실수한 것에 대해 알려줌
  */
 
-
+/* 
+  App()은 부모 Component
+  Panda(), renderPanda()는 자식 Component
+ */
+ 
 // id 값을 넣어야 unique key prop 문제가 생기지 않는다.
 const pandaFamily = [
   {
