@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from "axios";
 import Movie from "./Movie";
+import "./App.css";
 
 // class component
 class App extends React.Component {
@@ -26,23 +27,29 @@ class App extends React.Component {
   render() {
     const { isLoading, movies } = this.state;
     return (
-      <div>
-        {isLoading 
-          ? "Loading..." 
-          : movies.map(movie => {
-            console.log(movie);
-            return (
-              <Movie
-                key = {movie.id} // chils의 유일한 key prop(없으면 warning)
-                id = {movie.id} 
-                year = {movie.year} 
-                title = {movie.title} 
-                summary = {movie.summary} 
-                poster = {movie.medium_cover_image}
-              />
-            );
-          })}
-      </div>
+      <section class="contatiner">
+        {isLoading ? (
+          <div class="loader">
+            <span class="loader_text">Loading...</span>
+          </div>
+        ) : (
+          <div class="movies">
+            {movies.map(movie => {
+              console.log(movie);
+              return (
+                <Movie
+                  key = {movie.id} // chils의 유일한 key prop(없으면 warning)
+                  id = {movie.id} 
+                  year = {movie.year} 
+                  title = {movie.title} 
+                  summary = {movie.summary} 
+                  poster = {movie.medium_cover_image}
+                />
+              );
+            })}
+          </div>
+        )}
+      </section>
     );
   }
 }
