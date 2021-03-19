@@ -1,1 +1,1 @@
-# State
+# State & Component life cycle
