@@ -3,8 +3,9 @@ import React from 'react';
 import axios from "axios";
 import Movie from "./Movie";
 import "./App.css";
+import "./Movie.css";
 
-// class component
+// className component
 class App extends React.Component {
   state = {
     isLoading : true,
@@ -18,7 +19,7 @@ class App extends React.Component {
       }
     } = await axios.get("https://yts-proxy.nomadcoders1.now.sh/list_movies.json?sort_by=rating");
     this.setState({ movies, isLoading : false }); // movies : movies 와 같음  
-  }
+  };
 
   componentDidMount() {
     this.getMovies();
@@ -27,13 +28,13 @@ class App extends React.Component {
   render() {
     const { isLoading, movies } = this.state;
     return (
-      <section class="contatiner">
+      <section className="contatiner">
         {isLoading ? (
-          <div class="loader">
-            <span class="loader_text">Loading...</span>
+          <div className="loader">
+            <span className="loader_text">Loading...</span>
           </div>
         ) : (
-          <div class="movies">
+          <div className="movies">
             {movies.map(movie => {
               console.log(movie);
               return (
@@ -44,6 +45,7 @@ class App extends React.Component {
                   title = {movie.title} 
                   summary = {movie.summary} 
                   poster = {movie.medium_cover_image}
+                  genres = {movie.genres}
                 />
               );
             })}
